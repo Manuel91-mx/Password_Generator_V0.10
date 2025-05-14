@@ -42,21 +42,27 @@ def load_character():
 
 
 def uppercase_authenticator(var1):
-    uppercase, lowercase, _, _ = load_character()
+    uppercase, _, _, _ = load_character()
     upper = False
-    var_password = int(len(var1))
     for i in uppercase:
         if i in var1:
             upper = True
             break
+    return upper
 
-    if upper is False:
-        for i in range(0, var_password):
-            if var1[i] in lowercase:
+
+def uppercase_converter(var1):
+    _, lowercase, _, _ = load_character()
+    var_password = int(len(var1))
+    for i in range(0, var_password):
+        if var1[i] in lowercase:
+            variant = algorith()
+            if 0 <= variant <= 15 or 32 <= variant <= 47 or 64 <= variant <= 79 or 96 <= variant <= 111:
                 upper_letter = var1[i]
                 upper_letter = upper_letter.upper()
                 var1[i] = upper_letter
-                break
+                #break
+    return var1
 
 
 def select_special_characters():
@@ -105,10 +111,13 @@ def main():
         letters_uppercase, letters_lowercase, symbols_, numbers_ = select_special_characters()
         password = password_generator(letters_uppercase, letters_lowercase, symbols_, numbers_, key)
 
-    #  ejemplo para truiquear el comando if para las minusculas y hacerlas mayusculas.
+    #  Used as tester of Lowercase password to uppercase some characters.
     #password = ["=", "j", "y", "4", "+", "!", "t", "2", "2", "x", "}", "o", "a", "'", "q", "m"]
 
-    uppercase_authenticator(password)
+    upper = uppercase_authenticator(password)
+
+    if upper is False:
+        uppercase_converter(password)
 
     password_generated = "".join(password)
 
